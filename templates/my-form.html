@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First Flask App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <p>
+        Hi Princess. WhatsApp is for noobs. Lets talk here.
+        <br>
+        My name is atheist bide hits, because I believe only in my creator :) 
+        <br>
+        I might look ugly but my thoughts aren't.
+        <br>
+        Play along with me and type your responses in that box. Clear the text box before writing new response and scroll down to see my messages.
+        <br>
+        Are you Ready?
+        <br><br>
+            Write here <input type="text" id="text1" name="text1"><br><br>
+            <button id="clicked" onclick="myFunction()">Submit</button>
+        </p>
+    <div class="show-data" >
+    </div>
+</body>
+</html>
+<script>
+function myFunction() {
+var text1= $('#text1').val();
+  $.ajax({
+              url: "/join",
+              type: "POST",
+              data: {text1:text1}
+          }).done(function(response) {
+            var html= "<br><br><br><p> <b> <b><p>";
+            response =response.result;
+                 $.each(response,function(key,val){
+                 console.log(val);
+                    html+="<p>"+val+"<p>"
+                });
+                html +="<br>";
+                $(".show-data").append(html);
+            });
+};
+  </script>
